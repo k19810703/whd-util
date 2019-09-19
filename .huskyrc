@@ -1,5 +1,6 @@
 {
   "hooks": {
-    "pre-commit": "npm run check && npm test && npm version patch"
+    "pre-commit": "npm run check && npm test",
+    "pre-push": "npm version patch"
   }
 }
