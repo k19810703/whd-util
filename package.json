@@ -1,0 +1,65 @@
+{
+  "name": "whd-util",
+  "version": "1.0.0",
+  "description": "WHD util",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --env=node",
+    "check": "eslint --ignore-path .eslintignore --quiet \"./**/*.js\""
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/public/**",
+      "!**/util/db2class.js",
+      "!**/util/decortar.js",
+      "!**/daemonProcess/**",
+      "!**/testutil/**",
+      "!**/unittest/**",
+      "!*.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/k19810703/whd-util.git"
+  },
+  "keywords": [
+    "util"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-angular": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.1.0",
+    "superagent": "^4.0.0",
+    "supertest": "^3.3.0"
+  },
+  "author": "wuhd <k19810703@163.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k19810703/whd-util/issues"
+  },
+  "homepage": "https://github.com/k19810703/whd-util#readme",
+  "dependencies": {
+    "jsonfile": "^5.0.0",
+    "papaparse": "^5.1.0",
+    "secure-random-string": "^1.1.2",
+    "winston": "^3.2.1"
+  }
+}
