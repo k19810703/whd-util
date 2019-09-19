@@ -1,5 +1,5 @@
 class BaseError {
-  constructor(description, statusCode = 500, data = {}) {
+  constructor(description, statusCode, data = {}) {
     Error.call(this);
     Error.captureStackTrace(this);
     this.statusCode = statusCode;

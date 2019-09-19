@@ -5,6 +5,7 @@ const jsonfile = require('jsonfile');
 
 const { BizError } = require('../Error/BizError');
 
+
 const length = 8;
 const alphanumeric = true;
 
@@ -13,6 +14,7 @@ const generateUKey = () => srs({ length, alphanumeric });
 // 检查checkpath是否存在
 const checkPathExist = (checkpath) => {
   if (!fs.existsSync(checkpath)) throw new BizError(`${checkpath} does not exist`);
+  return Promise.resolve();
 };
 
 // 删除path
@@ -24,20 +26,18 @@ const loadJSONFile = jsonfilepath => checkPathExist(jsonfilepath)
   .then(() => jsonfile.readFileSync(jsonfilepath))
   .then(jsondata => jsondata);
 
-const createFolderWhenNotExist = folder => fs.existsSync(folder)
+const createFolderWhenNotExist = folder => Promise.resolve(fs.existsSync(folder))
   .then((fileexist) => {
     if (!fileexist) fs.mkdirSync(folder);
+    return Promise.resolve();
   });
 
-const loadCSVFIle = (csvFilePath, encode = 'utf-8') => {
-  Papa.parse(fs.readFileSync(csvFilePath, encode), {
-    complete: (results) => {
-      this.data = Promise.resolve(results.data);
-    },
-    error: (error) => {
-      Promise.reject(error);
-    },
+const loadCSVFIle = async (csvFilePath, encode = 'utf-8') => {
+  const result = await Papa.parse(fs.readFileSync(csvFilePath, encode), {
+    complete: results => Promise.resolve(results.data),
+    // error: error => Promise.reject(error),
   });
+  return Promise.resolve(result.data);
 };
 
 // 获取folder下的所有文件信息，ignoreSystemFile=true时候排除系统文件

@@ -1,8 +1,8 @@
 const { BaseError } = require('./BaseError');
 
 class BizError extends BaseError {
-  constructor(description, data, statusCode = 400) {
-    super(description, data, statusCode);
+  constructor(description, statusCode = 400, data) {
+    super(description, statusCode, data);
   }
 }
 

@@ -1,8 +1,8 @@
 const { BaseError } = require('./BaseError');
 
 class SystemError extends BaseError {
-  constructor(description, data, statusCode = 500) {
-    super(description, data, statusCode);
+  constructor(description, statusCode = 500, data) {
+    super(description, statusCode, data);
   }
 }
 
