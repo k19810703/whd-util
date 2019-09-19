@@ -121,7 +121,7 @@ describe('loadCSVFIle test', () => {
     const expectData = [['a', 'b', 'c'], ['1', '2', '3'], ['4', '5', '6']];
     const csvdata = await util.loadCSVFIle(`${__dirname}/../data/test.csv`);
     expect(csvdata).toEqual(expect.objectContaining(expectData));
-  });
+  }); 
 });
 
 describe('getFileList test', () => {
