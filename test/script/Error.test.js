@@ -9,7 +9,7 @@ const {
 
 const dummyData = {
   dummyData: 'dummyData',
-}
+};
 
 test('BizError => message only', async () => {
   try {
