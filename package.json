@@ -1,6 +1,6 @@
 {
   "name": "whd-util",
-  "version": "1.0.57",
+  "version": "1.0.58",
   "description": "WHD util",
   "main": "index.js",
   "scripts": {
