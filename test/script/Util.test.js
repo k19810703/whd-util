@@ -15,8 +15,8 @@ describe('generateUKey test(without param)', () => {
   const ukey1 = util.generateUKey();
   const ukey2 = util.generateUKey(7);
 
-  const idschema1 = util.getIDSchema();
-  const idschema2 = util.getIDSchema(7);
+  // const idschema1 = util.getIDSchema();
+  // const idschema2 = util.getIDSchema(7);
 
   test('alphanumeric only', async () => {
     expect(ukey1).toMatch(/^[0-9a-zA-Z]+$/);
@@ -34,12 +34,12 @@ describe('generateUKey test(without param)', () => {
     expect(ukey2.length).toBe(7);
   });
 
-  test('check schema', async () => {
-    const { error: error1 } = idschema1.validate(ukey2);
-    const { error: error2 } = idschema2.validate(ukey1);
-    expect(error1.details[0].message).toBe('"value" length must be 8 characters long');
-    expect(error2.details[0].message).toBe('"value" length must be 7 characters long');
-  });
+  // test('check schema', async () => {
+  //   const { error: error1 } = idschema1.validate(ukey2);
+  //   const { error: error2 } = idschema2.validate(ukey1);
+  //   expect(error1.details[0].message).toBe('"value" length must be 8 characters long');
+  //   expect(error2.details[0].message).toBe('"value" length must be 7 characters long');
+  // });
 });
 
 

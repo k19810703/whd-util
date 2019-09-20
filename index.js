@@ -9,7 +9,6 @@ const {
   createFolderWhenNotExist,
   getFileList,
   loadCSVFIle,
-  getIDSchema,
 } = require('./src/util/util');
 
 module.exports = {
@@ -26,6 +25,5 @@ module.exports = {
     createFolderWhenNotExist,
     getFileList,
     loadCSVFIle,
-    getIDSchema,
   },
 };

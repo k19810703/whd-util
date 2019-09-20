@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Joi = require('@hapi/joi');
+// const Joi = require('@hapi/joi');
 const srs = require('secure-random-string');
 const Papa = require('papaparse');
 const jsonfile = require('jsonfile');
@@ -12,7 +12,7 @@ const alphanumeric = true;
 
 const generateUKey = (length = 8) => srs({ length, alphanumeric });
 
-const getIDSchema = (length = 8) => Joi.string().alphanum().length(length).required();
+// const getIDSchema = (length = 8) => Joi.string().alphanum().length(length).required();
 
 // 检查checkpath是否存在
 const checkPathExist = (checkpath) => {
@@ -74,5 +74,5 @@ module.exports = {
   createFolderWhenNotExist,
   getFileList,
   loadCSVFIle,
-  getIDSchema,
+  // getIDSchema,
 };
