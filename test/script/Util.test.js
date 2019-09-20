@@ -11,17 +11,40 @@ const {
 
 const testfile = './filetobedelete';
 
-describe('generateUKey test', () => {
-  const ukey = util.generateUKey();
+describe('generateUKey test(without param)', () => {
+  const ukey1 = util.generateUKey();
+  const ukey2 = util.generateUKey(7);
+
+  const idschema1 = util.getIDSchema();
+  const idschema2 = util.getIDSchema(7);
 
   test('alphanumeric only', async () => {
-    expect(ukey).toMatch(/^[0-9a-zA-Z]+$/);
+    expect(ukey1).toMatch(/^[0-9a-zA-Z]+$/);
   });
 
   test('expect length is 8', async () => {
-    expect(ukey.length).toBe(8);
+    expect(ukey1.length).toBe(8);
+  });
+
+  test('alphanumeric only', async () => {
+    expect(ukey2).toMatch(/^[0-9a-zA-Z]+$/);
+  });
+
+  test('expect length is 7', async () => {
+    expect(ukey2.length).toBe(7);
+  });
+
+  test('check schema', async () => {
+    const { error: error1 } = idschema1.validate(ukey2);
+    const { error: error2 } = idschema2.validate(ukey1);
+    expect(error1.details[0].message).toBe('"value" length must be 8 characters long');
+    expect(error2.details[0].message).toBe('"value" length must be 7 characters long');
   });
 });
+
+
+// describe('getIDSchema test(with param)', () => {
+// });
 
 describe('checkPathExist test', () => {
   test('folder not exist', async () => {
