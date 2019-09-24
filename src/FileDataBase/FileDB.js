@@ -14,10 +14,11 @@ class FileDB {
     const adapter = new FileSync(dbfilepath);
     log.debug(`init ${this.collectionname} with ${dbfilepath}`);
     this.db = low(adapter);
-    this.defaultSchema = {
-      id_required: Joi.string().alphanum().length(8).required(),
-      id: Joi.string().alphanum().length(8),
-      timestamp: Joi.date().timestamp('unix'),
+    const timestamp = Joi.date().timestamp('unix');
+    this.defalutSchema = {
+      id: Joi.string().alphanum().length(8).required(),
+      createtimestamp: timestamp,
+      updatetimestamp: timestamp,
     };
     if (init) {
       const initData = {};
