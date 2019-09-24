@@ -15,7 +15,7 @@ class FileDB {
     log.debug(`init ${this.collectionname} with ${dbfilepath}`);
     this.db = low(adapter);
     const timestamp = Joi.date().timestamp('unix');
-    this.defalutSchema = {
+    this.defaultSchema = {
       id: Joi.string().alphanum().length(8).required(),
       createtimestamp: timestamp,
       updatetimestamp: timestamp,
