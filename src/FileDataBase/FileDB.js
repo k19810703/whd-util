@@ -2,11 +2,14 @@ const Joi = require('@hapi/joi');
 const moment = require('moment');
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+const _ = require('lodash');
 
 const { log } = require('../log/log');
 const { generateUKey } = require('../util/util');
 const { BizError } = require('../Error/BizError');
 const { SystemError } = require('../Error/SystemError');
+
+const systemFields = ['id', 'createtimestamp', 'updatetimestamp'];
 
 class FileDB {
   constructor(name, dbfilepath, init = false) {
@@ -30,7 +33,7 @@ class FileDB {
 
   static layOutCheck(schema, data, type) {
     if (!schema) throw new SystemError(`${type} schema is not defined`);
-    const { error } = schema.validate(data);
+    const { error } = schema.validate(_.omit(data, systemFields));
     if (error) throw error;
     return true;
   }
@@ -136,8 +139,9 @@ class FileDB {
   }
 
   async findByCondition(condition) {
-    log.debug(`findById(base) find ${condition} ${this.collectionname}`);
+    log.debug(`findByCondition(base) find in ${this.collectionname} for ${JSON.stringify(condition)} `);
     const searchresult = this.db.get(this.collectionname).filter(condition).value();
+    log.debug(`found ${JSON.stringify(searchresult)}`);
     return Promise.resolve(searchresult);
   }
 
