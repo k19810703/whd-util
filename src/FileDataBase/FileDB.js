@@ -14,7 +14,12 @@ class FileDB {
     const adapter = new FileSync(dbfilepath);
     log.debug(`init ${this.collectionname} with ${dbfilepath}`);
     this.db = low(adapter);
-    this.id_layout = Joi.string().alphanum().length(8).required();
+    this.defaultSchema = {
+      id_required: Joi.string().alphanum().length(8).required(),
+      id: Joi.string().alphanum().length(8),
+      createtimestamp: Joi.date().timestamp('unix'),
+      updatetimestamp: Joi.date().timestamp('unix'),
+    };
     if (init) {
       const initData = {};
       initData[name] = [];
@@ -62,7 +67,7 @@ class FileDB {
   }
 
   async validateId(id) {
-    const { error } = this.id_layout.validate(id);
+    const { error } = this.defaultSchema.id.validate(id);
     if (error) throw new BizError(`id(${id}) is not a valid id`);
     return true;
   }
