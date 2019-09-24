@@ -17,8 +17,7 @@ class FileDB {
     this.defaultSchema = {
       id_required: Joi.string().alphanum().length(8).required(),
       id: Joi.string().alphanum().length(8),
-      createtimestamp: Joi.date().timestamp('unix'),
-      updatetimestamp: Joi.date().timestamp('unix'),
+      timestamp: Joi.date().timestamp('unix'),
     };
     if (init) {
       const initData = {};
