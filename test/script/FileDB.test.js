@@ -35,9 +35,6 @@ const dataSchema = Joi.object().keys({
 });
 
 const testNewData = {
-  id: '123',
-  createtimestamp: 123,
-  updatetimestamp: 456,
   description: 'description',
 };
 
