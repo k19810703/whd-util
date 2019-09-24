@@ -69,6 +69,13 @@ describe('FileDB test', () => {
   });
 
   test('data created could be retrieved by findById', async () => {
+    const searchCondition = { description: 'description' };
+    const dataCreated = await data.findByCondition(searchCondition);
+    expect(dataCreated.length).toBe(1);
+    expect(dataCreated[0]).toEqual(expect.objectContaining(newData));
+  });
+
+  test('data created could be retrieved by findById', async () => {
     const dataCreated = await data.findById(newData.id);
     expect(dataCreated).toEqual(expect.objectContaining(newData));
   });

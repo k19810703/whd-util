@@ -130,6 +130,12 @@ class FileDB {
     return Promise.resolve(this.db.get(this.collectionname).value());
   }
 
+  async findByCondition(condition) {
+    log.debug(`findById(base) find ${condition} ${this.collectionname}`);
+    const searchresult = this.db.get(this.collectionname).filter(condition).value();
+    return Promise.resolve(searchresult);
+  }
+
   async findById(id) {
     log.debug(`findById(base) find ${id} ${this.collectionname}`);
     await this.validateId(id);
