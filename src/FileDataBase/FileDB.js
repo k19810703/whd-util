@@ -69,7 +69,7 @@ class FileDB {
   }
 
   async validateId(id) {
-    const { error } = this.defaultSchema.id.validate(id);
+    const { error } = this.idSchema.validate(id);
     if (error) throw new BizError(`id(${id}) is not a valid id`);
     return true;
   }
