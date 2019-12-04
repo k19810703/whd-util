@@ -171,3 +171,46 @@ describe('getFileList test', () => {
     expect(filelist.length).toEqual(4);
   });
 });
+
+describe('httpClient test', () => {
+  test('不传入参数报错', async () => {
+    try {
+      util.httpClient();
+    } catch (error) {
+      expect(error).toBeInstanceOf(TypeError);
+    }
+  });
+
+  test('传入参数但不包括需要的字段报错', async () => {
+    try {
+      util.httpClient({});
+    } catch (error) {
+      expect(error).toBeInstanceOf(TypeError);
+    }
+  });
+
+  test('创建baseurl为http的httpclient,可以发送http请求,返回值200', async () => {
+    const httpclient = util.httpClient({
+      baseURL: 'http://www.httpbin.org',
+    });
+    const response = await httpclient.get('/get');
+    expect(response.status).toBe(200);
+  });
+
+  test('创建baseurl为https的httpclient,可以发送http请求,返回值200', async () => {
+    const httpclient = util.httpClient({
+      baseURL: 'https://www.httpbin.org',
+    });
+    const response = await httpclient.get('/get');
+    expect(response.status).toBe(200);
+  });
+
+  test('timeout 1毫秒,请求timeout', async () => {
+    const httpclient = util.httpClient({
+      baseURL: 'https://www.httpbin.org',
+      timeout: 1,
+    });
+    await httpclient.get('/get')
+      .catch(error => expect(error.message).toMatch('timeout of 1ms exceeded'));
+  });
+});

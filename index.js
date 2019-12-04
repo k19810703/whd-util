@@ -10,6 +10,7 @@ const {
   createFolderWhenNotExist,
   getFileList,
   loadCSVFIle,
+  httpClient,
 } = require('./src/util/util');
 
 module.exports = {
@@ -27,5 +28,6 @@ module.exports = {
     createFolderWhenNotExist,
     getFileList,
     loadCSVFIle,
+    httpClient,
   },
 };

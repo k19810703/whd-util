@@ -75,7 +75,7 @@ async function getFileList(folder, ignoreSystemFile = true) {
   return Promise.resolve(fileList);
 }
 
-function httpClient({ baseURL, timeout, headers }) {
+const httpClient = ({ baseURL, timeout, headers }) => {
   const axiosConfig = {
     baseURL,
     timeout: timeout || 10000,
