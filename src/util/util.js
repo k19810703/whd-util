@@ -1,4 +1,6 @@
 const fs = require('fs');
+const https = require('https');
+const axios = require('axios');
 // const Joi = require('@hapi/joi');
 const srs = require('secure-random-string');
 const Papa = require('papaparse');
@@ -65,6 +67,18 @@ async function getFileList(folder, ignoreSystemFile = true) {
   return Promise.resolve(fileList);
 }
 
+function httpClient({ baseURL, timeout, headers }) {
+  const axiosConfig = {
+    baseURL,
+    timeout: timeout || 10000,
+    hearders: headers || undefined,
+    httpsAgent: baseURL.startsWith('https') ? new https.Agent({
+      rejectUnauthorized: false,
+    }) : undefined,
+  };
+  const instance = axios.create(axiosConfig);
+  return instance;
+}
 
 module.exports = {
   checkPathExist,
@@ -74,5 +88,6 @@ module.exports = {
   createFolderWhenNotExist,
   getFileList,
   loadCSVFIle,
+  httpClient,
   // getIDSchema,
 };
