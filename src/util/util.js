@@ -86,7 +86,7 @@ const httpClient = ({ baseURL, timeout, headers }) => {
   };
   const instance = axios.create(axiosConfig);
   return instance;
-}
+};
 
 module.exports = {
   checkPathExist,
