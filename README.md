@@ -34,5 +34,6 @@ const { util } = require('whd-util');
     createFolderWhenNotExist,
     getFileList,
     loadCSVFIle,
+    httpClient,
   } = util;
 ```
