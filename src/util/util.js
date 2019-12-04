@@ -5,7 +5,7 @@ const axios = require('axios');
 const srs = require('secure-random-string');
 const Papa = require('papaparse');
 const jsonfile = require('jsonfile');
-
+const path = require('path');
 const { BizError } = require('../Error/BizError');
 
 
@@ -23,8 +23,8 @@ const checkPathExist = (checkpath) => {
 };
 
 // 删除path
-const deleteFile = path => checkPathExist(path)
-  .then(() => fs.unlinkSync(path));
+const deleteFile = pathToBeDel => checkPathExist(pathToBeDel)
+  .then(() => fs.unlinkSync(pathToBeDel));
 
 // 读取jsonfilepath指向的json文件，返回内容
 const loadJSONFile = jsonfilepath => checkPathExist(jsonfilepath)
@@ -33,7 +33,15 @@ const loadJSONFile = jsonfilepath => checkPathExist(jsonfilepath)
 
 const createFolderWhenNotExist = folder => Promise.resolve(fs.existsSync(folder))
   .then((fileexist) => {
-    if (!fileexist) fs.mkdirSync(folder);
+    if (!fileexist) {
+      let pathtmp;
+      folder.split(/[/\\]/).forEach((dirname) => {
+        pathtmp = pathtmp ? path.join(pathtmp, dirname) : dirname;
+        if (!fs.existsSync(pathtmp)) {
+          fs.mkdirSync(pathtmp);
+        }
+      });
+    }
     return Promise.resolve();
   });
 

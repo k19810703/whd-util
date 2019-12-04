@@ -18,19 +18,19 @@ describe('generateUKey test(without param)', () => {
   // const idschema1 = util.getIDSchema();
   // const idschema2 = util.getIDSchema(7);
 
-  test('alphanumeric only', async () => {
+  test('generateUKey() 结果只包含英数字', async () => {
     expect(ukey1).toMatch(/^[0-9a-zA-Z]+$/);
   });
 
-  test('expect length is 8', async () => {
+  test('generateUKey() 结果长度为8', async () => {
     expect(ukey1.length).toBe(8);
   });
 
-  test('alphanumeric only', async () => {
+  test('generateUKey(7) 结果只包含英数字', async () => {
     expect(ukey2).toMatch(/^[0-9a-zA-Z]+$/);
   });
 
-  test('expect length is 7', async () => {
+  test('generateUKey(7) 结果长度为7', async () => {
     expect(ukey2.length).toBe(7);
   });
 
@@ -47,7 +47,7 @@ describe('generateUKey test(without param)', () => {
 // });
 
 describe('checkPathExist test', () => {
-  test('folder not exist', async () => {
+  test('文件夹不存在时抛出异常', async () => {
     expect.assertions(3);
     try {
       await util.checkPathExist('./notexistfolder');
@@ -58,7 +58,7 @@ describe('checkPathExist test', () => {
     }
   });
 
-  test('folder exist', async () => {
+  test('文件夹不存在时正常结束', async () => {
     expect.assertions(0);
     try {
       await util.checkPathExist(__dirname);
@@ -71,7 +71,7 @@ describe('checkPathExist test', () => {
 });
 
 describe('deleteFile test', () => {
-  test('file not exist', async () => {
+  test('文件不存在时抛出异常', async () => {
     expect.assertions(3);
     try {
       await util.deleteFile('./notexistfile');
@@ -82,7 +82,7 @@ describe('deleteFile test', () => {
     }
   });
 
-  test('file exist', async () => {
+  test('文件存在时候正常结束', async () => {
     expect.assertions(0);
     try {
       fs.writeFileSync(testfile, 'aaa');
@@ -115,10 +115,11 @@ describe('loadJSONFile test', () => {
 });
 
 describe('createFolderWhenNotExist test', () => {
-  test('folder not exist', async () => {
-    expect.assertions(0);
+  test('文件夹不存在时正常创建', async () => {
+    expect.assertions(1);
     try {
-      await util.createFolderWhenNotExist('./testFolder');
+      await util.createFolderWhenNotExist('./testFolder/a');
+      expect(fs.existsSync('./testFolder/a')).toBe(true);
     } catch (error) {
       expect(error).toBeInstanceOf(BizError);
       expect(error.statusCode).toBe(400);
@@ -126,10 +127,11 @@ describe('createFolderWhenNotExist test', () => {
     }
   });
 
-  test('folder not exist', async () => {
+  test('文件夹存在时正常结束', async () => {
     expect.assertions(0);
     try {
       await util.createFolderWhenNotExist('./testFolder');
+      fs.rmdirSync('./testFolder/a');
       fs.rmdirSync('./testFolder');
     } catch (error) {
       expect(error).toBeInstanceOf(BizError);

@@ -10,6 +10,7 @@ class DataModel extends FileDB {
   constructor(name, dbfilepath, init) {
     super(name, dbfilepath, init);
     const description = Joi.string().required();
+    this.idSchema = Joi.string().empty('').length(8);
     this.createSchema = Joi.object().keys({
       id: Joi.string().empty(''),
       createtimestamp: Joi.number().empty(''),
@@ -23,6 +24,7 @@ class DataModel extends FileDB {
 class DataModelWOCreateSchema extends FileDB {
   constructor(name, dbfilepath) {
     super(name, dbfilepath);
+    this.idSchema = Joi.string().empty('').length(8);
     this.createSchema = null;
   }
 }
