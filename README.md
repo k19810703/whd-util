@@ -26,14 +26,19 @@
 ### util
 ```javascript
 const { util } = require('whd-util');
-  const {
-    checkPathExist,
-    deleteFile,
-    loadJSONFile,
-    generateUKey,
-    createFolderWhenNotExist,
-    getFileList,
-    loadCSVFIle,
-    httpClient,
-  } = util;
+const {
+  checkPathExist,
+  deleteFile,
+  loadJSONFile,
+  generateUKey,
+  createFolderWhenNotExist,
+  getFileList,
+  loadCSVFIle,
+  httpClient,
+} = util;
+
+const httpclient = util.httpClient({
+  baseURL: 'http://www.httpbin.org',
+});
+const response = await httpclient.get('/get');
 ```
