@@ -28,4 +28,8 @@ const log = createLogger({
   ],
 });
 
+/**
+ * 获取一个winston的日志实例
+ * @module log
+ */
 module.exports.log = log;
