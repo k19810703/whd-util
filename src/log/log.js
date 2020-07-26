@@ -1,3 +1,4 @@
+const moment = require('moment');
 const {
   createLogger,
   format,
@@ -11,7 +12,7 @@ const {
 } = format;
 
 const myFormat = printf(
-  param => `${param.timestamp} ${param.level}: ${param.message}`,
+  param => `${moment(param.timestamp).format('YYYY-MM-DDTHH:mm:ss.SSS')} ${param.level}: ${param.message}`,
 );
 // const logtransport = process.env.LogTransport === 'console' ?
 // new transports.Console() : new transports.File({ filename: process.env.LogTransport });

@@ -1,29 +1,14 @@
-// const Joi = require('@hapi/joi');
+const { util } = require('./index');
+const {
+  httpClient,
+} = util;
 
-// const { FileDB } = require('./index');
-
-// class DataModel extends FileDB {
-//   constructor(name, dbfilepath) {
-//     super(name, dbfilepath);
-//     const description = Joi.string().required();
-//     this.createSchema = Joi.object().keys({
-//       id: Joi.string().empty(''),
-//       createtimestamp: Joi.number().empty(''),
-//       updatetimestamp: Joi.number().empty(''),
-//       description,
-//     });
-//     this.updateSchema = this.createSchema;
-//   }
-// }
-
-// const datamodel = new DataModel('data', './data.json');
-
-const { httpClient } = require('./src/util/util');
-
-const httpclient = httpClient({
-  baseURL: 'https://www.httpbin.org'
-});
-
-httpclient.get('/get')
-  .then(response => console.log(response.data));
-
+(async ()=> {
+  const httpclient = util.httpClient({
+    baseURL: 'https://digital.rbits.chance.co.jp/digitalapp-bff/digitalapp-bff',
+    timeout: 10000,
+  });
+  const response = await httpclient.get('/api/v1/contactchange?deviceId=d123456');
+  console.log(response);
+})()
+.catch(e => console.error(e));
