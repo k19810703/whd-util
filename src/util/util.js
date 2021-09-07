@@ -6,13 +6,12 @@
 const fs = require('fs');
 const https = require('https');
 const axios = require('axios');
-// const Joi = require('@hapi/joi');
+// const Joi = require('joi');
 const srs = require('secure-random-string');
 const Papa = require('papaparse');
 const jsonfile = require('jsonfile');
 const path = require('path');
 const { BizError } = require('../Error/BizError');
-
 
 // const length = 8;
 const alphanumeric = true;
@@ -45,7 +44,7 @@ const checkPathExist = (checkpath) => {
  * @param {string} pathToBeDel - 待删除文件路径
  * @return {Promise}
  */
-const deleteFile = pathToBeDel => checkPathExist(pathToBeDel)
+const deleteFile = (pathToBeDel) => checkPathExist(pathToBeDel)
   .then(() => fs.unlinkSync(pathToBeDel));
 
 /**
@@ -54,9 +53,9 @@ const deleteFile = pathToBeDel => checkPathExist(pathToBeDel)
  * @param {string} jsonfilepath - json文件路径
  * @return {Promise<Object>} - json数据
  */
-const loadJSONFile = jsonfilepath => checkPathExist(jsonfilepath)
+const loadJSONFile = (jsonfilepath) => checkPathExist(jsonfilepath)
   .then(() => jsonfile.readFileSync(jsonfilepath))
-  .then(jsondata => jsondata);
+  .then((jsondata) => jsondata);
 
 /**
  * 创建目录，若目录不存在则创建，若存在则结束
@@ -64,7 +63,7 @@ const loadJSONFile = jsonfilepath => checkPathExist(jsonfilepath)
  * @param {string} folder - 待创建目录路径
  * @return {Promise}
  */
-const createFolderWhenNotExist = folder => Promise.resolve(fs.existsSync(folder))
+const createFolderWhenNotExist = (folder) => Promise.resolve(fs.existsSync(folder))
   .then((fileexist) => {
     if (!fileexist) {
       let pathtmp;
@@ -88,7 +87,7 @@ const createFolderWhenNotExist = folder => Promise.resolve(fs.existsSync(folder)
  */
 const loadCSVFIle = async (csvFilePath, encode = 'utf-8') => {
   const result = await Papa.parse(fs.readFileSync(csvFilePath, encode), {
-    complete: results => Promise.resolve(results.data),
+    complete: (results) => Promise.resolve(results.data),
     // error: error => Promise.reject(error),
   });
   return Promise.resolve(result.data);
@@ -142,7 +141,6 @@ const httpClient = ({ baseURL, timeout = 10000, headers }) => {
   const instance = axios.create(axiosConfig);
   return instance;
 };
-
 
 module.exports = {
   checkPathExist,

@@ -1,7 +1,6 @@
 const { BizError } = require('./src/Error/BizError');
 const { SystemError } = require('./src/Error/SystemError');
 const { log } = require('./src/log/log');
-const { FileDB } = require('./src/FileDataBase/FileDB');
 const {
   checkPathExist,
   deleteFile,
@@ -19,7 +18,6 @@ module.exports = {
     BizError,
     SystemError,
   },
-  FileDB,
   util: {
     checkPathExist,
     deleteFile,

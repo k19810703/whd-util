@@ -42,7 +42,6 @@ describe('generateUKey test(without param)', () => {
   // });
 });
 
-
 // describe('getIDSchema test(with param)', () => {
 // });
 
@@ -168,7 +167,7 @@ describe('getFileList test', () => {
 
   test('getFileList not ignore system file', async () => {
     const filelist = await util.getFileList(`${__dirname}/../data`, false);
-    expect(filelist.length).toEqual(4);
+    expect(filelist.length).toEqual(5);
   });
 });
 
@@ -211,6 +210,6 @@ describe('httpClient test', () => {
       timeout: 1,
     });
     await httpclient.get('/get')
-      .catch(error => expect(error.message).toMatch('timeout of 1ms exceeded'));
+      .catch((error) => expect(error.message).toMatch('timeout of 1ms exceeded'));
   });
 });
